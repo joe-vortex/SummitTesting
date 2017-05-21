@@ -1,0 +1,147 @@
+@mobile: 480px;
+@phablet: 640px;
+@tablet: 768px;
+@desktop: 1024px; // standard tablet 
+@desktop-large: 1280px; // galaxy tab landscape
+@desktop-xlarge: 1440px;
+
+//
+//  Media width mixin used to group styles output based on media queries
+//  ---------------------------------------------
+
+// Magento's original mixin
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @phablet) {}
+
+// Summit mixins
+// Declare mixins to avoid compilation errors
+
+
+.media-all(){};
+
+.media-upto-mobile(){};
+.media-upto-phablet(){};
+.media-upto-tablet(){};
+.media-upto-desktop(){};
+.media-upto-large-desktop(){};
+
+.media-from-mobile(){};
+.media-from-phablet(){};
+.media-from-tablet(){};
+.media-from-desktop(){};
+.media-from-large-desktop(){};
+
+.media-btwn-mobile-phablet(){};
+.media-btwn-mobile-tablet(){};
+.media-btwn-phablet-tablet(){};
+.media-btwn-tablet-desktop(){};
+.media-btwn-desktop-large(){};
+
+
+//
+//  Style groups for 'mobile' devices
+//  ---------------------------------------------
+
+.media-mobile(){
+     // max 479px
+     @media only screen and (max-width: (@mobile - 1)) {
+        .media-width('max', @mobile);
+        .media-upto-mobile();
+    }
+    // max 639px
+    @media only screen and (max-width: (@phablet - 1)) {
+        .media-width('max', @phablet);
+        .media-upto-phablet();
+    }
+    // max 767
+    @media only screen and (max-width: (@tablet - 1)) {
+        .media-width('max', @tablet);
+        .media-upto-tablet();
+    }
+    // min 640px
+    @media all and (min-width: @phablet) {
+        .media-width('min', @phablet);
+        .media-from-phablet();
+    }
+    // min 480px
+    @media all and (min-width: @mobile) {
+        .media-width('min', @mobile);
+        .media-from-mobile();
+    }
+
+    @media (min-width: @mobile) and (max-width: (@phablet - 1)) {
+        .media-btwn-mobile-phablet();
+    }
+    @media (min-width: @phablet) and (max-width: (@tablet - 1)) {
+        .media-btwn-phablet-tablet();
+    }
+    @media (min-width: @mobile) and (max-width: (@tablet - 1)) {
+        .media-btwn-mobile-tablet();
+    }
+}
+
+.media-tablet() {
+      // min 768px
+      @media all and (min-width: @tablet),
+      print {
+        .media-width('min', @tablet);
+    }
+
+    // max 1024
+    @media all and (max-width: @desktop),
+    print {
+        .media-width('max', @desktop);
+    }
+    @media (min-width: @tablet) and (max-width: (@desktop - 1)) {
+        .media-btwn-tablet-desktop();
+    }
+}
+
+.media-desktop() {
+    // min 1025
+      @media all and (min-width: (@desktop + 1)),
+      print {
+        .media-width('min', @desktop);
+    }
+
+    // max 1279
+    @media all and (max-width: (@desktop-large - 1)),
+    print {
+        .media-width('max', @desktop-large);
+    }
+    
+    // min 1280
+    @media all and (min-width: @desktop-large),
+    print {
+        .media-width('min', @desktop-large);
+    }
+
+    @media (min-width: @desktop) and (max-width: (@desktop-large - 1)) {
+        .media-btwn-desktop-large();
+    }
+}
+
+// Mixture of all break points & non-responsive styles
+& when (@media-target = all) {
+    .media-mobile();
+    .media-tablet();
+    .media-desktop();
+    .media-all();
+}
+
+// Mobile only & non-responsive styles
+& when (@media-target = mobile)  {
+    .media-mobile();
+    .media-all();
+}
+
+// Tablet only & non-responsive styles
+& when (@media-target = tablet) {
+    .media-tablet();
+    .media-all(); 
+}
+
+// Desktop only & non-responsive styles
+& when (@media-target = desktop) {
+   .media-desktop();
+   .media-all();
+}

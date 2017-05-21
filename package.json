@@ -1,0 +1,18 @@
+{
+  "name": "less-testing",
+  "version": "1.0.0",
+  "description": "testing for m2 less compilation",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt-contrib-less": "^1.4.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo 1"
+  },
+  "author": "joe",
+  "license": "ISC"
+}

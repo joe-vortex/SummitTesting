@@ -1,0 +1,31 @@
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @tablet) {
+	& when (@module = global) {
+		.global-mobile {
+			color:red
+		}
+	}
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @tablet) {
+	& when (@module = global) {
+		.global-tablet {
+			color:red
+		}
+	}
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @desktop) {
+	& when (@module = global) {
+		.global-desktop {
+			color:red
+		}
+	}
+}
+
+.media-all() {
+	& when (@module = global) {
+		.global-all {
+			color:green
+		}
+	}
+}
